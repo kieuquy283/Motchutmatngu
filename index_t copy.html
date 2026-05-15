@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>生日快乐 - 魔法粒子 v6.6 (丝滑交互版)</title>
+    <title>ç”Ÿæ—¥å¿«ä¹ - é­”æ³•ç²’å­ v6.6 (ä¸æ»‘äº¤äº’ç‰ˆ)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Three.js -->
@@ -29,7 +29,7 @@
         #canvas-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; cursor: grab; }
         #canvas-container:active { cursor: grabbing; }
         
-        /* 翻转卡片 */
+        /* ç¿»è½¬å¡ç‰‡ */
         .flip-card { background-color: transparent; perspective: 1000px; }
         .flip-card-inner {
             position: relative; width: 100%; height: 100%; text-align: center;
@@ -44,13 +44,13 @@
         }
         .flip-card-back { transform: rotateY(180deg); }
 
-        /* UI 层 */
+        /* UI å±‚ */
         #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; box-sizing: border-box; transition: opacity 0.5s; }
         .interactive-element { pointer-events: auto; cursor: pointer; }
         .input_video { display: none; }
         .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); }
         
-        /* 启动页样式 */
+        /* å¯åŠ¨é¡µæ ·å¼ */
         #start-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.6); 
@@ -124,7 +124,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
-        /* 增强的摄像头预览框样式 */
+        /* å¢žå¼ºçš„æ‘„åƒå¤´é¢„è§ˆæ¡†æ ·å¼ */
         #cam-preview-container {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -133,14 +133,14 @@
             opacity: 1;
         }
         
-        /* 霓虹呼吸效果 */
+        /* éœ“è™¹å‘¼å¸æ•ˆæžœ */
         @keyframes neon-pulse {
             0%, 100% { text-shadow: 0 0 10px rgba(255,105,180,0.7), 0 0 20px rgba(255,105,180,0.5); }
             50% { text-shadow: 0 0 20px rgba(255,105,180,0.9), 0 0 30px rgba(255,105,180,0.7), 0 0 40px rgba(255,105,180,0.5); }
         }
         .neon-pulse { animation: neon-pulse 2s infinite; }
 
-        /* 隐藏的日志容器，防止报错 */
+        /* éšè—çš„æ—¥å¿—å®¹å™¨ï¼Œé˜²æ­¢æŠ¥é”™ */
         #debug-console { display: none; }
     </style>
 </head>
@@ -149,8 +149,8 @@
     <div id="debug-console"></div>
 
     <div id="protocol-warning">
-        ⚠️ 检测到您直接打开了HTML文件 (file://)。<br>摄像头和麦克风将被拦截。<br>
-        <b>请在 VS Code 中安装 "Live Server" 插件并使用 "Open with Live Server" 运行。</b>
+        âš ï¸ æ£€æµ‹åˆ°æ‚¨ç›´æŽ¥æ‰“å¼€äº†HTMLæ–‡ä»¶ (file://)ã€‚<br>æ‘„åƒå¤´å’Œéº¦å…‹é£Žå°†è¢«æ‹¦æˆªã€‚<br>
+        <b>è¯·åœ¨ VS Code ä¸­å®‰è£… "Live Server" æ’ä»¶å¹¶ä½¿ç”¨ "Open with Live Server" è¿è¡Œã€‚</b>
     </div>
 
     <audio id="bgm" loop>
@@ -160,25 +160,25 @@
     <video class="input_video" playsinline></video>
     <div id="canvas-container"></div>
     
-    <button id="floating-gift-btn" class="hidden safe-click-area" title="查看祝福">🎁</button>
+    <button id="floating-gift-btn" class="hidden safe-click-area" title="æŸ¥çœ‹ç¥ç¦">ðŸŽ</button>
 
-    <!-- 启动页 -->
+    <!-- å¯åŠ¨é¡µ -->
     <div id="start-overlay">
         <div class="text-center max-w-md p-8 glass-panel start-card mx-4 animate-float">
             <h1 class="text-6xl mb-2 font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-400 drop-shadow-lg">Happy Birthday</h1>
-            <h2 class="text-4xl mb-6 font-bold text-white tracking-widest neon-text">粉姐</h2>
+            <h2 class="text-4xl mb-6 font-bold text-white tracking-widest neon-text">ç²‰å§</h2>
             <div class="space-y-4 text-gray-200 text-lg mb-8 font-light">
-                <p>👋 <b>对着镜头 举起双手</b> 唤醒魔法</p>
-                <p>💨 <b>持续吹气</b> 许下心愿</p>
+                <p>ðŸ‘‹ <b>å¯¹ç€é•œå¤´ ä¸¾èµ·åŒæ‰‹</b> å”¤é†’é­”æ³•</p>
+                <p>ðŸ’¨ <b>æŒç»­å¹æ°”</b> è®¸ä¸‹å¿ƒæ„¿</p>
             </div>
             <button id="start-btn" class="safe-click-area px-12 py-4 bg-gradient-to-r from-pink-600 to-purple-700 rounded-full font-bold text-xl hover:scale-105 active:scale-95 transition transform shadow-[0_0_20px_rgba(255,105,180,0.5)] text-white border border-white/20 cursor-pointer z-50">
-                进入魔法世界
+                è¿›å…¥é­”æ³•ä¸–ç•Œ
             </button>
-            <div id="loading-text" class="hidden mt-4 text-pink-300 text-sm">正在编织星光...</div>
+            <div id="loading-text" class="hidden mt-4 text-pink-300 text-sm">æ­£åœ¨ç¼–ç»‡æ˜Ÿå…‰...</div>
         </div>
     </div>
 
-    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">🎤 对着麦克风吹气</p><p class="text-xs text-gray-400">(如果麦克风不灵可以尝试电脑长按空格 · 手机长按屏幕)</p></div>
+    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">ðŸŽ¤ å¯¹ç€éº¦å…‹é£Žå¹æ°”</p><p class="text-xs text-gray-400">(å¦‚æžœéº¦å…‹é£Žä¸çµå¯ä»¥å°è¯•ç”µè„‘é•¿æŒ‰ç©ºæ ¼ Â· æ‰‹æœºé•¿æŒ‰å±å¹•)</p></div>
     <div id="blow-meter-container"><div id="blow-meter-bar"></div></div>
 
     <div id="top-banner" class="hidden">
@@ -186,7 +186,7 @@
         <p class="text-pink-200/70 text-lg mt-2 tracking-widest uppercase">Best Wishes for You</p>
     </div>
 
-    <!-- UI 层 -->
+    <!-- UI å±‚ -->
     <div id="ui-layer" style="display: none;">
         <div class="flex justify-between items-start w-full">
             <div class="glass-panel px-4 py-2">
@@ -194,31 +194,31 @@
                 <span id="status-text" class="text-xs md:text-sm text-gray-300 tracking-wider">SYSTEM READY</span>
             </div>
             <div class="flex gap-2">
-                <button id="settings-toggle" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90 text-sm">🎨</button>
-                <button id="music-btn" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90">🎵</button>
+                <button id="settings-toggle" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90 text-sm">ðŸŽ¨</button>
+                <button id="music-btn" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90">ðŸŽµ</button>
             </div>
         </div>
         
         <div id="settings-panel">
-            <div class="color-control"><span>底层颜色</span><input type="color" id="picker-bottom" value="#FF69B4"></div>
-            <div class="color-control"><span>顶层颜色</span><input type="color" id="picker-top" value="#FFB6C1"></div>
-            <div class="color-control"><span>奶油颜色</span><input type="color" id="picker-cream" value="#FFFFFF"></div>
+            <div class="color-control"><span>åº•å±‚é¢œè‰²</span><input type="color" id="picker-bottom" value="#FF69B4"></div>
+            <div class="color-control"><span>é¡¶å±‚é¢œè‰²</span><input type="color" id="picker-top" value="#FFB6C1"></div>
+            <div class="color-control"><span>å¥¶æ²¹é¢œè‰²</span><input type="color" id="picker-cream" value="#FFFFFF"></div>
         </div>
 
         <div id="center-instruction" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none w-full z-0">
             <div class="flex items-center justify-center gap-4 mb-2">
-                <span id="hand-icon" class="text-6xl animate-bounce">👋</span>
-                <h2 id="instruction-text" class="text-6xl md:text-8xl font-bold text-white neon-pulse transition-all duration-700">举起双手</h2>
+                <span id="hand-icon" class="text-6xl animate-bounce">ðŸ‘‹</span>
+                <h2 id="instruction-text" class="text-6xl md:text-8xl font-bold text-white neon-pulse transition-all duration-700">ä¸¾èµ·åŒæ‰‹</h2>
             </div>
-            <p id="sub-instruction" class="mt-4 text-xl md:text-2xl text-pink-200/80 font-light tracking-[0.3em]">让魔法发生</p>
+            <p id="sub-instruction" class="mt-4 text-xl md:text-2xl text-pink-200/80 font-light tracking-[0.3em]">è®©é­”æ³•å‘ç”Ÿ</p>
         </div>
 
-        <!-- 增强的左下角摄像头预览框 -->
+        <!-- å¢žå¼ºçš„å·¦ä¸‹è§’æ‘„åƒå¤´é¢„è§ˆæ¡† -->
         <div id="cam-preview-container" class="absolute bottom-6 left-6 z-50 opacity-90 hover:opacity-100">
             <div class="glass-panel p-2 rounded-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
                 <div class="relative w-36 h-28 bg-black/40 rounded-lg overflow-hidden border border-white/5">
                      <canvas id="output_canvas" width="160" height="120" class="w-full h-full object-cover transform scale-x-[-1]"></canvas>
-                     <!-- 状态指示灯 -->
+                     <!-- çŠ¶æ€æŒ‡ç¤ºç¯ -->
                      <div class="absolute top-2 right-2 flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
                         <div id="cam-status-dot" class="w-1.5 h-1.5 rounded-full bg-red-500 transition-colors duration-300"></div>
                         <span id="cam-status-text" class="text-[8px] text-red-400 font-mono">NO HAND</span>
@@ -231,13 +231,13 @@
         </div>
     </div>
 
-    <!-- 惊喜层 -->
+    <!-- æƒŠå–œå±‚ -->
     <div id="surprise-layer" class="hidden">
-        <button id="reveal-btn" class="safe-click-area hidden px-10 py-5 bg-white text-pink-600 rounded-full font-bold text-2xl shadow-[0_0_60px_rgba(255,105,180,0.8)] hover:scale-105 transition-transform duration-300 animate-float">🎁 打开礼物</button>
+        <button id="reveal-btn" class="safe-click-area hidden px-10 py-5 bg-white text-pink-600 rounded-full font-bold text-2xl shadow-[0_0_60px_rgba(255,105,180,0.8)] hover:scale-105 transition-transform duration-300 animate-float">ðŸŽ æ‰“å¼€ç¤¼ç‰©</button>
         
         <div id="flip-card-container" class="hidden flip-card w-full max-w-sm md:max-w-md aspect-[3/4] mx-6 pop-in">
             <div class="flip-card-inner">
-                <!-- 正面 -->
+                <!-- æ­£é¢ -->
                 <div class="flip-card-front glass-panel bg-gradient-to-br from-pink-500/40 to-purple-600/40 border border-white/30 p-1">
                     <div class="bg-black/80 rounded-[1rem] p-6 h-full flex flex-col backdrop-blur-md">
                         <div class="w-full aspect-[4/3] bg-gray-800 rounded-lg mb-6 overflow-hidden relative border border-white/10 shadow-inner">
@@ -245,18 +245,18 @@
                             <div class="absolute bottom-3 left-4 text-white/90 font-handwriting text-2xl">Happy Birthday!</div>
                         </div>
                         <div class="text-center mt-auto mb-8">
-                            <p class="text-gray-300 mb-6 font-light leading-relaxed">这不仅仅是一场数字烟花，<br>更是为粉姐准备的专属时刻。</p>
-                            <button id="next-surprise-btn" class="safe-click-area w-full py-3 bg-gradient-to-r from-pink-600 to-purple-700 rounded-xl font-bold text-white shadow-lg hover:brightness-110 active:scale-95 transition">What's the surprise? ✨</button>
+                            <p class="text-gray-300 mb-6 font-light leading-relaxed">è¿™ä¸ä»…ä»…æ˜¯ä¸€åœºæ•°å­—çƒŸèŠ±ï¼Œ<br>æ›´æ˜¯ä¸ºç²‰å§å‡†å¤‡çš„ä¸“å±žæ—¶åˆ»ã€‚</p>
+                            <button id="next-surprise-btn" class="safe-click-area w-full py-3 bg-gradient-to-r from-pink-600 to-purple-700 rounded-xl font-bold text-white shadow-lg hover:brightness-110 active:scale-95 transition">What's the surprise? âœ¨</button>
                         </div>
                     </div>
                 </div>
-                <!-- 背面 -->
+                <!-- èƒŒé¢ -->
                 <div class="flip-card-back glass-panel bg-gradient-to-br from-purple-500/40 to-blue-600/40 border border-white/30 p-1">
                     <div class="bg-black/90 rounded-[1rem] p-8 h-full flex flex-col items-center justify-center backdrop-blur-md">
-                        <div class="mb-6 text-5xl animate-bounce">💌</div>
-                        <h3 class="text-2xl font-bold text-pink-300 mb-6 font-handwriting">致最特别的粉姐</h3>
+                        <div class="mb-6 text-5xl animate-bounce">ðŸ’Œ</div>
+                        <h3 class="text-2xl font-bold text-pink-300 mb-6 font-handwriting">è‡´æœ€ç‰¹åˆ«çš„ç²‰å§</h3>
                         <div id="typewriter-text" class="text-left text-gray-200 space-y-4 font-light leading-7 text-sm md:text-base border-l-2 border-pink-500/50 pl-4 mb-8 min-h-[120px] w-full"></div>
-                        <button id="close-card-btn" class="safe-click-area px-8 py-2 rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm">收起卡片</button>
+                        <button id="close-card-btn" class="safe-click-area px-8 py-2 rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm">æ”¶èµ·å¡ç‰‡</button>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
     </div>
 
     <script>
-        // --- 调试日志工具 ---
+        // --- è°ƒè¯•æ—¥å¿—å·¥å…· ---
         const debugConsole = document.getElementById('debug-console');
         function log(msg) {
             if (debugConsole) {
@@ -275,17 +275,17 @@
         }
 
         const IS_MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        log(`环境检测: Mobile=${IS_MOBILE}, Protocol=${window.location.protocol}`);
+        log(`çŽ¯å¢ƒæ£€æµ‹: Mobile=${IS_MOBILE}, Protocol=${window.location.protocol}`);
         
-        // --- 环境检测 ---
+        // --- çŽ¯å¢ƒæ£€æµ‹ ---
         if (window.location.protocol === 'file:') {
             document.getElementById('protocol-warning').style.display = 'block';
-            log('错误: 检测到 file:// 协议，摄像头将无法使用');
+            log('é”™è¯¯: æ£€æµ‹åˆ° file:// åè®®ï¼Œæ‘„åƒå¤´å°†æ— æ³•ä½¿ç”¨');
         }
 
-        // --- 全局变量与配置 ---
+        // --- å…¨å±€å˜é‡ä¸Žé…ç½® ---
         const CAKE_THEME = { bottom: "#FF69B4", top: "#FFB6C1", cream: "#FFFFFF" };
-        const VISUAL_CONFIG = { particleCount: IS_MOBILE ? 4000 : 7500, color: 0xff69b4, blowThreshold: 25, blowMaxDuration: 100 };
+        const VISUAL_CONFIG = { particleCount: IS_MOBILE ? 4000 : 7500, color: 0xff69b4, blowThreshold: 15, blowIncreaseSpeed: 2.2, blowDecreaseSpeed: 0.15, blowMaxDuration: 100 };
         const STATE = { INTRO: -1, IDLE: 0, COUNTDOWN: 1, CAKE: 2, BLOWING: 3, CELEBRATION: 4 };
         
         let currentState = STATE.INTRO;
@@ -303,7 +303,7 @@
         let isDragging = false;
         let previousMouseX = 0;
         let lastHandX = 0;
-        let autoRotateSpeed = 0.005; // 新增：自动缓慢旋转
+        let autoRotateSpeed = 0.005; // æ–°å¢žï¼šè‡ªåŠ¨ç¼“æ…¢æ—‹è½¬
         
         let audioContext, analyser;
         const bgm = document.getElementById('bgm');
@@ -335,11 +335,11 @@
             camStatusText: document.getElementById('cam-status-text')
         };
 
-        // 立即初始化 Three.js 以显示启动背景
+        // ç«‹å³åˆå§‹åŒ– Three.js ä»¥æ˜¾ç¤ºå¯åŠ¨èƒŒæ™¯
         initThree();
 
         function initThree() {
-            log('初始化 3D 场景...');
+            log('åˆå§‹åŒ– 3D åœºæ™¯...');
             const container = document.getElementById('canvas-container');
             scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x000000, 0.002);
@@ -367,7 +367,7 @@
             const onMove = (x) => {
                 if(isDragging && interactionMode === 1) {
                     const delta = x - previousMouseX;
-                    // 大幅提高触摸灵敏度
+                    // å¤§å¹…æé«˜è§¦æ‘¸çµæ•åº¦
                     const sensitivity = IS_MOBILE ? 0.015 : 0.008; 
                     rotationVelocity = delta * sensitivity;
                     particleSystem.rotation.y += rotationVelocity;
@@ -388,7 +388,7 @@
             window.addEventListener('touchend', onEnd);
             
             render();
-            log('3D 场景渲染已启动');
+            log('3D åœºæ™¯æ¸²æŸ“å·²å¯åŠ¨');
         }
 
         function createParticles() {
@@ -616,7 +616,7 @@
             
             if (interactionMode === 1) {
                 if (!isDragging) {
-                    // 降低摩擦力，增加惯性（0.96 -> 0.98），并保持微量自转
+                    // é™ä½Žæ‘©æ“¦åŠ›ï¼Œå¢žåŠ æƒ¯æ€§ï¼ˆ0.96 -> 0.98ï¼‰ï¼Œå¹¶ä¿æŒå¾®é‡è‡ªè½¬
                     rotationVelocity *= 0.96; 
                     particleSystem.rotation.y += rotationVelocity + autoRotateSpeed;
                 }
@@ -627,12 +627,12 @@
             }
         }
 
-        /* --- 业务逻辑 --- */
+        /* --- ä¸šåŠ¡é€»è¾‘ --- */
         let transitionLock = false;
 
         function startSequence() {
             if (currentState !== STATE.IDLE || transitionLock) return;
-            log('检测到手势，开始倒计时序列');
+            log('æ£€æµ‹åˆ°æ‰‹åŠ¿ï¼Œå¼€å§‹å€’è®¡æ—¶åºåˆ—');
             transitionLock = true;
             currentState = STATE.COUNTDOWN;
             ui.statusText.innerText = "GESTURE DETECTED";
@@ -655,7 +655,7 @@
         }
 
         function showCake() {
-            log('展示蛋糕，开启吹气检测');
+            log('å±•ç¤ºè›‹ç³•ï¼Œå¼€å¯å¹æ°”æ£€æµ‹');
             currentState = STATE.BLOWING;
             transitionTo('cake');
             ui.settingsPanel.style.display = 'flex';
@@ -668,7 +668,7 @@
         }
 
         function successCelebration() {
-            log('许愿成功！播放庆祝动画');
+            log('è®¸æ„¿æˆåŠŸï¼æ’­æ”¾åº†ç¥åŠ¨ç”»');
             currentState = STATE.CELEBRATION;
             ui.statusText.innerText = "WISH GRANTED";
             ui.blowMeter.style.opacity = '0';
@@ -704,22 +704,22 @@
         });
 
         const wishes = [
-            "生日快乐！",
-            "愿你遍历山河，觉得人间值得。",
-            "愿你眼里的星星永远发亮，",
-            "心中的太阳永远滚烫。",
-            "新的一岁，请继续自由、热烈、闪闪发光！",
-            "—— 送给最特别的粉姐 ",
+            "ç”Ÿæ—¥å¿«ä¹ï¼",
+            "æ„¿ä½ éåŽ†å±±æ²³ï¼Œè§‰å¾—äººé—´å€¼å¾—ã€‚",
+            "æ„¿ä½ çœ¼é‡Œçš„æ˜Ÿæ˜Ÿæ°¸è¿œå‘äº®ï¼Œ",
+            "å¿ƒä¸­çš„å¤ªé˜³æ°¸è¿œæ»šçƒ«ã€‚",
+            "æ–°çš„ä¸€å²ï¼Œè¯·ç»§ç»­è‡ªç”±ã€çƒ­çƒˆã€é—ªé—ªå‘å…‰ï¼",
+            "â€”â€” é€ç»™æœ€ç‰¹åˆ«çš„ç²‰å§ ",
 
-            "但是我点惭愧，粉姐。",
-            "因为我没拿捏准时间，还有商家发货时间晚的问题，",
-            "今天Surprise可能来不及送到你手上，",
-            "所以真的很抱歉。",
-            "快递编号：SF0250934920309",
-            "你可以用这个编号去顺丰官网查一下。",
-            "希望你喜欢这个小小的Surprise！🎉🎂🎈",
-            "记得开箱给我录个视频或者拍个照哦！📸😊",
-            "因为我也还没看过呢！😆"
+            "ä½†æ˜¯æˆ‘ç‚¹æƒ­æ„§ï¼Œç²‰å§ã€‚",
+            "å› ä¸ºæˆ‘æ²¡æ‹¿æå‡†æ—¶é—´ï¼Œè¿˜æœ‰å•†å®¶å‘è´§æ—¶é—´æ™šçš„é—®é¢˜ï¼Œ",
+            "ä»Šå¤©Surpriseå¯èƒ½æ¥ä¸åŠé€åˆ°ä½ æ‰‹ä¸Šï¼Œ",
+            "æ‰€ä»¥çœŸçš„å¾ˆæŠ±æ­‰ã€‚",
+            "å¿«é€’ç¼–å·ï¼šSF0250934920309",
+            "ä½ å¯ä»¥ç”¨è¿™ä¸ªç¼–å·åŽ»é¡ºä¸°å®˜ç½‘æŸ¥ä¸€ä¸‹ã€‚",
+            "å¸Œæœ›ä½ å–œæ¬¢è¿™ä¸ªå°å°çš„Surpriseï¼ðŸŽ‰ðŸŽ‚ðŸŽˆ",
+            "è®°å¾—å¼€ç®±ç»™æˆ‘å½•ä¸ªè§†é¢‘æˆ–è€…æ‹ä¸ªç…§å“¦ï¼ðŸ“¸ðŸ˜Š",
+            "å› ä¸ºæˆ‘ä¹Ÿè¿˜æ²¡çœ‹è¿‡å‘¢ï¼ðŸ˜†"
         ];
 
         function startTypewriter() {
@@ -780,13 +780,13 @@
             ui.topBanner.classList.remove('hidden');
         });
 
-        // 按钮点击事件处理
+        // æŒ‰é’®ç‚¹å‡»äº‹ä»¶å¤„ç†
         ui.startBtn.addEventListener('click', async function() {
-            log('点击了进入按钮...');
+            log('ç‚¹å‡»äº†è¿›å…¥æŒ‰é’®...');
             const btn = this;
             
             if (typeof Hands === 'undefined') {
-                log('警告: MediaPipe 库加载延迟。');
+                log('è­¦å‘Š: MediaPipe åº“åŠ è½½å»¶è¿Ÿã€‚');
             }
 
             btn.innerHTML = '<span class="animate-pulse">Loading...</span>';
@@ -796,22 +796,22 @@
             try {
                 fadeAudioIn();
                 await initAudio();
-                log('音频初始化成功');
+                log('éŸ³é¢‘åˆå§‹åŒ–æˆåŠŸ');
             } catch(e) {
-                log('音频初始化警告: ' + e);
+                log('éŸ³é¢‘åˆå§‹åŒ–è­¦å‘Š: ' + e);
                 ui.statusText.innerText = "AUDIO/MIC LIMITED";
             }
 
             try {
-                log('尝试启动摄像头...');
+                log('å°è¯•å¯åŠ¨æ‘„åƒå¤´...');
                 await initCamera();
-                log('摄像头启动成功');
+                log('æ‘„åƒå¤´å¯åŠ¨æˆåŠŸ');
             } catch (e) {
-                log('摄像头/MediaPipe 失败: ' + e);
+                log('æ‘„åƒå¤´/MediaPipe å¤±è´¥: ' + e);
                 ui.statusText.innerText = "CAMERA FAILED - USE SPACEBAR";
             }
             
-            log('进入主界面...');
+            log('è¿›å…¥ä¸»ç•Œé¢...');
             currentState = STATE.IDLE;
             ui.startOverlay.classList.add('hidden');
             ui.uiLayer.style.display = 'flex';
@@ -827,7 +827,7 @@
                 source.connect(analyser);
                 checkAudio();
             } catch (e) {
-                log('麦克风权限被拒绝');
+                log('éº¦å…‹é£Žæƒé™è¢«æ‹’ç»');
                 ui.statusText.innerText = "MIC DENIED - USE TOUCH/SPACE";
                 throw e;
             }
@@ -856,10 +856,10 @@
             }
             if (volume > VISUAL_CONFIG.blowThreshold || isSpacePressed || isTouching) {
                 isBlowing = true;
-                blowProgress += 0.5; 
+                blowProgress += VISUAL_CONFIG.blowIncreaseSpeed; 
             } else {
                 isBlowing = false;
-                blowProgress -= 0.3; 
+                blowProgress -= VISUAL_CONFIG.blowDecreaseSpeed; 
             }
             blowProgress = Math.max(0, Math.min(100, blowProgress));
             ui.blowBar.style.width = blowProgress + '%';
@@ -870,9 +870,9 @@
             const playPromise = bgm.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    log('背景音乐开始播放');
+                    log('èƒŒæ™¯éŸ³ä¹å¼€å§‹æ’­æ”¾');
                 }).catch(error => {
-                    log('自动播放被阻止，等待用户交互');
+                    log('è‡ªåŠ¨æ’­æ”¾è¢«é˜»æ­¢ï¼Œç­‰å¾…ç”¨æˆ·äº¤äº’');
                 });
             }
             
@@ -893,7 +893,7 @@
             const video = document.getElementsByClassName('input_video')[0];
             
             if (typeof Hands === 'undefined' || typeof Camera === 'undefined') {
-                throw new Error("MediaPipe 库未加载");
+                throw new Error("MediaPipe åº“æœªåŠ è½½");
             }
 
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`});
@@ -918,7 +918,7 @@
                         const currentHandX = results.multiHandLandmarks[0][9].x; 
                         const delta = currentHandX - lastHandX;
                         if (Math.abs(delta) > 0.002) {
-                            // 大幅提高手势控制灵敏度
+                            // å¤§å¹…æé«˜æ‰‹åŠ¿æŽ§åˆ¶çµæ•åº¦
                             rotationVelocity += delta * -0.4; 
                         }
                         lastHandX = currentHandX;

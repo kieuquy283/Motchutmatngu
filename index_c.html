@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>生日快乐 - 魔法粒子 v4.5 (柔光护眼版)</title>
+    <title>ç”Ÿæ—¥å¿«ä¹ - é­”æ³•ç²’å­ v4.5 (æŸ”å…‰æŠ¤çœ¼ç‰ˆ)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Three.js -->
@@ -11,12 +11,12 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
     
-    <!-- MediaPipe 辅助库 -->
+    <!-- MediaPipe è¾…åŠ©åº“ -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     
-    <!-- MediaPipe 核心库 -->
+    <!-- MediaPipe æ ¸å¿ƒåº“ -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js" crossorigin="anonymous"></script>
 
     <style>
@@ -171,7 +171,7 @@
                 <div id="blow-meter-container" class="safe-click-area w-64 max-w-[80vw] h-2 rounded-full bg-slate-700/80 overflow-hidden opacity-0">
                     <div id="blow-meter-bar" class="h-full w-0 bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 shadow-[0_0_18px_rgba(56,189,248,0.85)]"></div>
                 </div>
-                <p id="blow-hint" class="text-[11px] text-slate-200/90 tracking-[0.22em] uppercase opacity-0">blow the candles · or long press screen</p>
+                <p id="blow-hint" class="text-[11px] text-slate-200/90 tracking-[0.22em] uppercase opacity-0">blow the candles Â· or long press screen</p>
             </section>
         </main>
 
@@ -182,21 +182,21 @@
                         <div class="flex items-center justify-between gap-3">
                             <p class="text-xs text-slate-300/90 tracking-[0.18em] uppercase">surprise unlocked</p>
                             <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/40 text-[11px] text-emerald-200">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]"></span> new year · new wish
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]"></span> new year Â· new wish
                             </span>
                         </div>
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                             <div class="text-left space-y-1">
                                 <p class="text-sm text-slate-100/90">
                                     <span class="text-pink-300 font-handwriting text-lg align-middle mr-1.5">Hey</span>
-                                    魔法仪式已完成 ✨
+                                    é­”æ³•ä»ªå¼å·²å®Œæˆ âœ¨
                                 </p>
                                 <p class="text-xs text-slate-300/80 leading-relaxed">
-                                    还有<span class="text-pink-300 mx-1">一份只属于你的惊喜</span>等待开启。
+                                    è¿˜æœ‰<span class="text-pink-300 mx-1">ä¸€ä»½åªå±žäºŽä½ çš„æƒŠå–œ</span>ç­‰å¾…å¼€å¯ã€‚
                                 </p>
                             </div>
                             <button id="reveal-btn" class="safe-click-area btn-glow-soft inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 via-fuchsia-500 to-sky-500 text-xs font-medium tracking-[0.18em] uppercase shadow-lg hover:shadow-xl hover:scale-[1.02] transition">
-                                <span class="mr-1.5">OPEN</span> <span class="text-lg">🎁</span>
+                                <span class="mr-1.5">OPEN</span> <span class="text-lg">ðŸŽ</span>
                             </button>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                             <span class="inline-block w-1 h-1 rounded-full bg-slate-700"></span>
                         </span>
                         <button id="next-surprise-btn" class="safe-click-area text-[11px] text-slate-200 hover:text-pink-200 transition flex items-center gap-1">
-                            <span>More</span> <span class="text-[15px]">→</span>
+                            <span>More</span> <span class="text-[15px]">â†’</span>
                         </button>
                     </div>
                 </div>
@@ -218,18 +218,18 @@
                     <div class="flip-container">
                         <div id="wish-card-3d" class="flip-inner">
                             <div class="flip-face flip-front bg-gradient-to-br from-pink-500/40 to-purple-500/50 flex flex-col items-center justify-center">
-                                <div class="text-5xl mb-2">💌</div>
-                                <div class="text-pink-100 text-lg font-handwriting">点我翻面</div>
+                                <div class="text-5xl mb-2">ðŸ’Œ</div>
+                                <div class="text-pink-100 text-lg font-handwriting">ç‚¹æˆ‘ç¿»é¢</div>
                             </div>
                             <div class="flip-face flip-back bg-black">
                                 <img id="user-photo" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop" alt="Photo" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-pink-300 mb-4 font-handwriting">致最特别的你</h3>
+                    <h3 class="text-2xl font-bold text-pink-300 mb-4 font-handwriting">è‡´æœ€ç‰¹åˆ«çš„ä½ </h3>
                     <div id="blessing-text" class="text-left text-gray-200 font-light leading-7 text-sm md:text-base border-l-2 border-pink-500/50 pl-4 mb-3 relative"></div>
                     <canvas id="signature-canvas"></canvas>
-                    <button id="close-card-btn" class="safe-click-area mt-3 px-8 py-2 rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm">收起卡片</button>
+                    <button id="close-card-btn" class="safe-click-area mt-3 px-8 py-2 rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm">æ”¶èµ·å¡ç‰‡</button>
                 </div>
             </div>
         </section>
@@ -242,14 +242,14 @@
                     <p class="text-xs text-slate-300 tracking-[0.25em] uppercase">birthday ritual</p>
                     <h1 class="font-handwriting text-3xl sm:text-4xl text-glow mt-1">Make a wish</h1>
                 </div>
-                <span class="text-3xl">🎂</span>
+                <span class="text-3xl">ðŸŽ‚</span>
             </div>
             <p class="text-sm text-slate-200/90 leading-relaxed mb-4">
-                打开摄像头 &amp; 麦克风，<span class="text-pink-300">举起你的手</span>，让魔法在你指尖出现。<br>
-                <span class="text-xs text-slate-400 mt-2 block">(右上角有摄像头画面可供检查，若识别困难可点击屏幕辅助触发)</span>
+                æ‰“å¼€æ‘„åƒå¤´ &amp; éº¦å…‹é£Žï¼Œ<span class="text-pink-300">ä¸¾èµ·ä½ çš„æ‰‹</span>ï¼Œè®©é­”æ³•åœ¨ä½ æŒ‡å°–å‡ºçŽ°ã€‚<br>
+                <span class="text-xs text-slate-400 mt-2 block">(å³ä¸Šè§’æœ‰æ‘„åƒå¤´ç”»é¢å¯ä¾›æ£€æŸ¥ï¼Œè‹¥è¯†åˆ«å›°éš¾å¯ç‚¹å‡»å±å¹•è¾…åŠ©è§¦å‘)</span>
             </p>
             <button id="start-btn" class="w-full safe-click-area btn-glow-soft mt-2 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-fuchsia-500 to-sky-500 text-xs sm:text-sm font-medium tracking-[0.18em] uppercase shadow-lg hover:shadow-xl hover:scale-[1.02] transition">
-                <span class="mr-2">开始仪式</span> <span>✨</span>
+                <span class="mr-2">å¼€å§‹ä»ªå¼</span> <span>âœ¨</span>
             </button>
             <p id="loading-text" class="mt-3 text-[11px] text-slate-400 text-center hidden">Initializing Magic Engine...</p>
         </div>
@@ -265,7 +265,7 @@
 
         const STATE = { IDLE: 0, GATHERING: 0.5, COUNTDOWN: 1, CAKE: 2, BLOWING: 3, CELEBRATION: 4 };
         const ENERGY_CIRCUMFERENCE = 2 * Math.PI * 110;
-        const blessingContent = "生日快乐！\n愿你遍历山河，觉得人间值得。\n愿你眼里的星星永远发亮。\n新的一岁，继续闪闪发光！";
+        const blessingContent = "ç”Ÿæ—¥å¿«ä¹ï¼\næ„¿ä½ éåŽ†å±±æ²³ï¼Œè§‰å¾—äººé—´å€¼å¾—ã€‚\næ„¿ä½ çœ¼é‡Œçš„æ˜Ÿæ˜Ÿæ°¸è¿œå‘äº®ã€‚\næ–°çš„ä¸€å²ï¼Œç»§ç»­é—ªé—ªå‘å…‰ï¼";
 
         let currentState = STATE.IDLE;
         let particlesData = [];
@@ -408,7 +408,7 @@
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
             geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-            // 核心修复：alpha * 0.15 (柔光护眼) + 柔和边缘
+            // æ ¸å¿ƒä¿®å¤ï¼šalpha * 0.15 (æŸ”å…‰æŠ¤çœ¼) + æŸ”å’Œè¾¹ç¼˜
             const material = new THREE.ShaderMaterial({
                 uniforms: {},
                 vertexShader: `
@@ -417,7 +417,7 @@
                     void main() {
                         vColor = color;
                         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                        // 稍微调小一点尺寸系数，防止手机上太大
+                        // ç¨å¾®è°ƒå°ä¸€ç‚¹å°ºå¯¸ç³»æ•°ï¼Œé˜²æ­¢æ‰‹æœºä¸Šå¤ªå¤§
                         gl_PointSize = size * (600.0 / -mvPosition.z);
                         gl_Position = projectionMatrix * mvPosition;
                     }
@@ -429,11 +429,11 @@
                         float dist = length(uv);
                         if (dist > 0.5) discard;
                         
-                        // 边缘极其柔和
+                        // è¾¹ç¼˜æžå…¶æŸ”å’Œ
                         float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
                         
-                        // 核心：大幅降低透明度，防止叠加过曝
-                        // 0.15 是关键参数
+                        // æ ¸å¿ƒï¼šå¤§å¹…é™ä½Žé€æ˜Žåº¦ï¼Œé˜²æ­¢å åŠ è¿‡æ›
+                        // 0.15 æ˜¯å…³é”®å‚æ•°
                         gl_FragColor = vec4(vColor, alpha * 0.15); 
                     }
                 `,
@@ -545,7 +545,7 @@
                     {y: -5, r: 25, h: 12, color: 0xff69b4},
                 ];
                 layers.forEach(l => {
-                    for(let i=0; i<800; i++) { // 进一步降低密度，防止过亮
+                    for(let i=0; i<800; i++) { // è¿›ä¸€æ­¥é™ä½Žå¯†åº¦ï¼Œé˜²æ­¢è¿‡äº®
                         const th = Math.random()*Math.PI*2;
                         const r = Math.random()*l.r;
                         pts.push({
@@ -741,9 +741,9 @@
             const avg = sum / data.length;
             
             if (avg > CONFIG.blowThreshold) {
-                blowProgress += 0.8;
+                blowProgress += VISUAL_CONFIG.blowIncreaseSpeed;
             } else {
-                blowProgress -= 0.2;
+                blowProgress -= VISUAL_CONFIG.blowDecreaseSpeed;
             }
             blowProgress = Math.max(0, Math.min(100, blowProgress));
             uiElements.blowBar.style.width = blowProgress + '%';
@@ -797,7 +797,7 @@
 
         function initCamera() {
             if (typeof Camera === 'undefined') {
-                alert("组件未加载完成，请刷新页面重试。或者直接使用触控模式。");
+                alert("ç»„ä»¶æœªåŠ è½½å®Œæˆï¼Œè¯·åˆ·æ–°é¡µé¢é‡è¯•ã€‚æˆ–è€…ç›´æŽ¥ä½¿ç”¨è§¦æŽ§æ¨¡å¼ã€‚");
                 uiElements.camStatus.innerText = "LIB ERROR";
                 return;
             }
@@ -885,7 +885,7 @@
                     console.error("Camera failed:", err);
                     uiElements.camStatus.innerText = "ERROR";
                     uiElements.cameraPreview.style.display = 'none'; 
-                    alert("无法启动摄像头，已自动切换为触控模式。请点击屏幕任意位置开始。");
+                    alert("æ— æ³•å¯åŠ¨æ‘„åƒå¤´ï¼Œå·²è‡ªåŠ¨åˆ‡æ¢ä¸ºè§¦æŽ§æ¨¡å¼ã€‚è¯·ç‚¹å‡»å±å¹•ä»»æ„ä½ç½®å¼€å§‹ã€‚");
                 });
         }
 
