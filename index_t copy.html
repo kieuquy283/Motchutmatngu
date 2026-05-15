@@ -160,7 +160,7 @@
     <video class="input_video" playsinline></video>
     <div id="canvas-container"></div>
     
-    <button id="floating-gift-btn" class="hidden safe-click-area" title="æŸ¥çœ‹ç¥ç¦">ðŸŽ</button>
+    <button id="floating-gift-btn" class="hidden safe-click-area" title="View Wishes">🎁</button>
 
     <!-- å¯åŠ¨é¡µ -->
     <div id="start-overlay">
@@ -168,8 +168,8 @@
             <h1 class="text-6xl mb-2 font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-400 drop-shadow-lg">Happy Birthday</h1>
             <h2 class="text-4xl mb-6 font-bold text-white tracking-widest neon-text">ç²‰å§</h2>
             <div class="space-y-4 text-gray-200 text-lg mb-8 font-light">
-                <p>ðŸ‘‹ <b>å¯¹ç€é•œå¤´ ä¸¾èµ·åŒæ‰‹</b> å”¤é†’é­”æ³•</p>
-                <p>ðŸ’¨ <b>æŒç»­å¹æ°”</b> è®¸ä¸‹å¿ƒæ„¿</p>
+                <p>👋 <b>Raise your hands to the camera</b> to awaken the magic</p>
+                <p>💨 <b>Keep blowing</b> to make a wish</p>
             </div>
             <button id="start-btn" class="safe-click-area px-12 py-4 bg-gradient-to-r from-pink-600 to-purple-700 rounded-full font-bold text-xl hover:scale-105 active:scale-95 transition transform shadow-[0_0_20px_rgba(255,105,180,0.5)] text-white border border-white/20 cursor-pointer z-50">
                 è¿›å…¥é­”æ³•ä¸–ç•Œ
@@ -178,7 +178,7 @@
         </div>
     </div>
 
-    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">ðŸŽ¤ å¯¹ç€éº¦å…‹é£Žå¹æ°”</p><p class="text-xs text-gray-400">(å¦‚æžœéº¦å…‹é£Žä¸çµå¯ä»¥å°è¯•ç”µè„‘é•¿æŒ‰ç©ºæ ¼ Â· æ‰‹æœºé•¿æŒ‰å±å¹•)</p></div>
+    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">🎤 Blow out the candles</p><p class="text-xs text-gray-400">(Hold Space or touch and hold the screen if the microphone does not work)</p></div>
     <div id="blow-meter-container"><div id="blow-meter-bar"></div></div>
 
     <div id="top-banner" class="hidden">
@@ -194,8 +194,8 @@
                 <span id="status-text" class="text-xs md:text-sm text-gray-300 tracking-wider">SYSTEM READY</span>
             </div>
             <div class="flex gap-2">
-                <button id="settings-toggle" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90 text-sm">ðŸŽ¨</button>
-                <button id="music-btn" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90">ðŸŽµ</button>
+                <button id="settings-toggle" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90 text-sm">🎨</button>
+                <button id="music-btn" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90">🎵</button>
             </div>
         </div>
         
@@ -207,7 +207,7 @@
 
         <div id="center-instruction" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none w-full z-0">
             <div class="flex items-center justify-center gap-4 mb-2">
-                <span id="hand-icon" class="text-6xl animate-bounce">ðŸ‘‹</span>
+                <span id="hand-icon" class="text-6xl animate-bounce">👋</span>
                 <h2 id="instruction-text" class="text-6xl md:text-8xl font-bold text-white neon-pulse transition-all duration-700">ä¸¾èµ·åŒæ‰‹</h2>
             </div>
             <p id="sub-instruction" class="mt-4 text-xl md:text-2xl text-pink-200/80 font-light tracking-[0.3em]">è®©é­”æ³•å‘ç”Ÿ</p>
@@ -233,7 +233,7 @@
 
     <!-- æƒŠå–œå±‚ -->
     <div id="surprise-layer" class="hidden">
-        <button id="reveal-btn" class="safe-click-area hidden px-10 py-5 bg-white text-pink-600 rounded-full font-bold text-2xl shadow-[0_0_60px_rgba(255,105,180,0.8)] hover:scale-105 transition-transform duration-300 animate-float">ðŸŽ æ‰“å¼€ç¤¼ç‰©</button>
+        <button id="reveal-btn" class="safe-click-area hidden px-10 py-5 bg-white text-pink-600 rounded-full font-bold text-2xl shadow-[0_0_60px_rgba(255,105,180,0.8)] hover:scale-105 transition-transform duration-300 animate-float">🎁 Open your gift</button>
         
         <div id="flip-card-container" class="hidden flip-card w-full max-w-sm md:max-w-md aspect-[3/4] mx-6 pop-in">
             <div class="flip-card-inner">
@@ -246,14 +246,14 @@
                         </div>
                         <div class="text-center mt-auto mb-8">
                             <p class="text-gray-300 mb-6 font-light leading-relaxed">è¿™ä¸ä»…ä»…æ˜¯ä¸€åœºæ•°å­—çƒŸèŠ±ï¼Œ<br>æ›´æ˜¯ä¸ºç²‰å§å‡†å¤‡çš„ä¸“å±žæ—¶åˆ»ã€‚</p>
-                            <button id="next-surprise-btn" class="safe-click-area w-full py-3 bg-gradient-to-r from-pink-600 to-purple-700 rounded-xl font-bold text-white shadow-lg hover:brightness-110 active:scale-95 transition">What's the surprise? âœ¨</button>
+                            <button id="next-surprise-btn" class="safe-click-area w-full py-3 bg-gradient-to-r from-pink-600 to-purple-700 rounded-xl font-bold text-white shadow-lg hover:brightness-110 active:scale-95 transition">What's the surprise? ✨</button>
                         </div>
                     </div>
                 </div>
                 <!-- èƒŒé¢ -->
                 <div class="flip-card-back glass-panel bg-gradient-to-br from-purple-500/40 to-blue-600/40 border border-white/30 p-1">
                     <div class="bg-black/90 rounded-[1rem] p-8 h-full flex flex-col items-center justify-center backdrop-blur-md">
-                        <div class="mb-6 text-5xl animate-bounce">ðŸ’Œ</div>
+                        <div class="mb-6 text-5xl animate-bounce">💌</div>
                         <h3 class="text-2xl font-bold text-pink-300 mb-6 font-handwriting">è‡´æœ€ç‰¹åˆ«çš„ç²‰å§</h3>
                         <div id="typewriter-text" class="text-left text-gray-200 space-y-4 font-light leading-7 text-sm md:text-base border-l-2 border-pink-500/50 pl-4 mb-8 min-h-[120px] w-full"></div>
                         <button id="close-card-btn" class="safe-click-area px-8 py-2 rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm">æ”¶èµ·å¡ç‰‡</button>
@@ -717,9 +717,9 @@
             "æ‰€ä»¥çœŸçš„å¾ˆæŠ±æ­‰ã€‚",
             "å¿«é€’ç¼–å·ï¼šSF0250934920309",
             "ä½ å¯ä»¥ç”¨è¿™ä¸ªç¼–å·åŽ»é¡ºä¸°å®˜ç½‘æŸ¥ä¸€ä¸‹ã€‚",
-            "å¸Œæœ›ä½ å–œæ¬¢è¿™ä¸ªå°å°çš„Surpriseï¼ðŸŽ‰ðŸŽ‚ðŸŽˆ",
-            "è®°å¾—å¼€ç®±ç»™æˆ‘å½•ä¸ªè§†é¢‘æˆ–è€…æ‹ä¸ªç…§å“¦ï¼ðŸ“¸ðŸ˜Š",
-            "å› ä¸ºæˆ‘ä¹Ÿè¿˜æ²¡çœ‹è¿‡å‘¢ï¼ðŸ˜†"
+            "Hope you love this little surprise! 🎉🎂🎈",
+            "Please record a video or take a photo when you unbox it! 📸😊",
+            "I cannot wait to see it too! 😆"
         ];
 
         function startTypewriter() {
