@@ -29,6 +29,26 @@
         }
         #canvas-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; cursor: grab; }
         #canvas-container:active { cursor: grabbing; }
+        .floating-photo-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 6;
+            pointer-events: none;
+            display: none;
+            overflow: hidden;
+        }
+        .floating-photo {
+            position: absolute;
+            width: clamp(74px, 10vw, 132px);
+            aspect-ratio: 4 / 5;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.72);
+            box-shadow: 0 0 18px rgba(255, 105, 180, 0.5), 0 10px 30px rgba(0, 0, 0, 0.42);
+            object-fit: cover;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+            opacity: 0.95;
+        }
         
         /* ç¿»è½¬å¡ç‰‡ */
         .flip-card { background-color: transparent; perspective: 1000px; }
@@ -178,6 +198,7 @@
 
     <video class="input_video" playsinline></video>
     <div id="canvas-container"></div>
+    <div id="floating-photo-layer" class="floating-photo-layer"></div>
     
     <button id="floating-gift-btn" class="hidden safe-click-area" title="View Wishes">🎁</button>
 
@@ -343,6 +364,17 @@
         let previousMouseX = 0;
         let lastHandX = 0;
         let autoRotateSpeed = 0.005;
+        let floatingPhotos = [];
+        let floatingPhotoLayerVisible = false;
+        let floatingPhotoArea = { width: window.innerWidth, height: window.innerHeight };
+        const handMotion = {
+            prevX: null,
+            prevY: null,
+            smoothVX: 0,
+            smoothVY: 0,
+            speed: 0,
+            active: 0
+        };
 
         // --- è‡ªåŠ¨å€’æ•°å˜é‡ ---
         let autoEntryTimer = null;
@@ -382,11 +414,13 @@
             textContainer1: document.getElementById('typewriter-text-1'),
             textContainer2: document.getElementById('typewriter-text-2'),
             // è‡ªåŠ¨å€’æ•°æ–‡æœ¬
-            autoCountdownText: document.getElementById('auto-countdown-text')
+            autoCountdownText: document.getElementById('auto-countdown-text'),
+            floatingPhotoLayer: document.getElementById('floating-photo-layer')
         };
 
         // ç«‹å³åˆå§‹åŒ– Three.js
         initThree();
+        initFloatingPhotos();
 
         function initThree() {
             const container = document.getElementById('canvas-container');
@@ -404,6 +438,8 @@
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
+                floatingPhotoArea.width = window.innerWidth;
+                floatingPhotoArea.height = window.innerHeight;
             });
 
             const onStart = (x) => {
@@ -678,6 +714,7 @@
 
         function startSequence() {
             if (currentState !== STATE.IDLE || transitionLock) return;
+            hideFloatingPhotos();
                         
             // æ¸…é™¤è‡ªåŠ¨å€’æ•°è®¡æ—¶å™¨
             if (autoEntryTimer) {
@@ -711,6 +748,7 @@
         function showCake() {
             log('å±•ç¤ºè›‹ç³•ï¼Œå¼€å¯å¹æ°”æ£€æµ‹');
             currentState = STATE.BLOWING;
+            showFloatingPhotos();
             transitionTo('cake');
             ui.settingsPanel.style.display = 'flex';
             ui.mainText.innerText = "";
@@ -724,6 +762,7 @@
         function successCelebration() {
             log('è®¸æ„¿æˆåŠŸï¼æ’­æ”¾åº†ç¥åŠ¨ç”»');
             currentState = STATE.CELEBRATION;
+            hideFloatingPhotos();
             ui.statusText.innerText = "WISH GRANTED";
             ui.blowMeter.style.opacity = '0';
             ui.blowHint.style.opacity = '0';
@@ -857,6 +896,7 @@
             ui.floatingGiftBtn.classList.remove('hidden');
             
             interactionMode = 1; 
+            showFloatingPhotos();
             transitionTo('cake'); 
             ui.statusText.innerText = "INTERACTIVE MODE: DRAG TO ROTATE";
             ui.typewriter.innerHTML = ""; 
@@ -864,6 +904,136 @@
         });
 
         
+        function initFloatingPhotos() {
+            if (!ui.floatingPhotoLayer) return;
+            const photoSources = [
+                "./assets/images/photo1.jpg",
+                "./assets/images/photo2.jpg",
+                "./assets/images/photo3.jpg",
+                "./assets/images/photo4.jpg",
+                "./assets/images/photo5.jpg",
+                "./assets/images/photo6.jpg"
+            ];
+            const presets = [
+                { x: 0.18, y: 0.22, rx: 9, ry: 8, r0: -8, ph: 0.3 },
+                { x: 0.82, y: 0.22, rx: 10, ry: 7, r0: 7, ph: 1.2 },
+                { x: 0.14, y: 0.48, rx: 7, ry: 10, r0: -6, ph: 2.0 },
+                { x: 0.86, y: 0.48, rx: 8, ry: 9, r0: 6, ph: 2.8 },
+                { x: 0.22, y: 0.76, rx: 8, ry: 7, r0: -7, ph: 3.4 },
+                { x: 0.78, y: 0.76, rx: 9, ry: 8, r0: 8, ph: 4.1 }
+            ];
+
+            ui.floatingPhotoLayer.innerHTML = "";
+            floatingPhotos = presets.map((preset, i) => {
+                const img = document.createElement("img");
+                img.className = "floating-photo";
+                img.src = photoSources[i % photoSources.length];
+                img.alt = `photo-${i + 1}`;
+                img.loading = "lazy";
+                ui.floatingPhotoLayer.appendChild(img);
+                return {
+                    el: img,
+                    baseXRatio: preset.x,
+                    baseYRatio: preset.y,
+                    phase: preset.ph,
+                    floatRadiusX: preset.rx,
+                    floatRadiusY: preset.ry,
+                    baseRotation: preset.r0,
+                    reactionX: 0,
+                    reactionY: 0,
+                    rotation: preset.r0,
+                    scale: 1
+                };
+            });
+        }
+
+        function showFloatingPhotos() {
+            if (!ui.floatingPhotoLayer || floatingPhotos.length === 0) return;
+            floatingPhotoLayerVisible = true;
+            ui.floatingPhotoLayer.style.display = "block";
+        }
+
+        function hideFloatingPhotos() {
+            floatingPhotoLayerVisible = false;
+            handMotion.prevX = null;
+            handMotion.prevY = null;
+            handMotion.smoothVX = 0;
+            handMotion.smoothVY = 0;
+            handMotion.speed = 0;
+            handMotion.active = 0;
+            if (ui.floatingPhotoLayer) ui.floatingPhotoLayer.style.display = "none";
+        }
+
+        function updateHandMotion(results) {
+            const hasHand = results && results.multiHandLandmarks && results.multiHandLandmarks.length > 0;
+            const threshold = 0.008;
+            if (!hasHand) {
+                handMotion.smoothVX *= 0.86;
+                handMotion.smoothVY *= 0.86;
+                handMotion.speed *= 0.84;
+                handMotion.active *= 0.92;
+                handMotion.prevX = null;
+                handMotion.prevY = null;
+                return;
+            }
+
+            const palm = results.multiHandLandmarks[0][9];
+            const x = palm.x;
+            const y = palm.y;
+
+            if (handMotion.prevX === null || handMotion.prevY === null) {
+                handMotion.prevX = x;
+                handMotion.prevY = y;
+                return;
+            }
+
+            const dx = x - handMotion.prevX;
+            const dy = y - handMotion.prevY;
+            handMotion.prevX = x;
+            handMotion.prevY = y;
+
+            const speed = Math.hypot(dx, dy);
+            const active = speed > threshold ? 1 : 0;
+            handMotion.smoothVX += (dx - handMotion.smoothVX) * 0.22;
+            handMotion.smoothVY += (dy - handMotion.smoothVY) * 0.22;
+            handMotion.speed += (speed - handMotion.speed) * 0.2;
+            handMotion.active += (active - handMotion.active) * 0.18;
+        }
+
+        function updateFloatingPhotos(nowMs) {
+            if (!floatingPhotoLayerVisible || floatingPhotos.length === 0) return;
+            const t = nowMs * 0.001;
+            const width = floatingPhotoArea.width;
+            const height = floatingPhotoArea.height;
+            const velX = handMotion.smoothVX;
+            const velY = handMotion.smoothVY;
+            const handSpeed = handMotion.speed * handMotion.active;
+
+            const targetReactionX = Math.max(-32, Math.min(32, velX * width * 0.45));
+            const targetReactionY = Math.max(-28, Math.min(28, velY * height * 0.45));
+            const targetRotation = Math.max(-9, Math.min(9, velX * 40));
+            const targetScale = 1 + Math.min(handSpeed * 8, 0.12);
+
+            for (let i = 0; i < floatingPhotos.length; i++) {
+                const p = floatingPhotos[i];
+                p.reactionX += (targetReactionX - p.reactionX) * 0.12;
+                p.reactionY += (targetReactionY - p.reactionY) * 0.12;
+                p.rotation += ((p.baseRotation + targetRotation) - p.rotation) * 0.12;
+                p.scale += (targetScale - p.scale) * 0.12;
+
+                const idleX = Math.sin(t * 0.9 + p.phase) * p.floatRadiusX;
+                const idleY = Math.cos(t * 1.05 + p.phase) * p.floatRadiusY;
+                const baseX = width * p.baseXRatio;
+                const baseY = height * p.baseYRatio;
+                const x = baseX + idleX + p.reactionX;
+                const y = baseY + idleY + p.reactionY;
+
+                p.el.style.left = `${baseX}px`;
+                p.el.style.top = `${baseY}px`;
+                p.el.style.transform = `translate3d(${(x - baseX).toFixed(2)}px, ${(y - baseY).toFixed(2)}px, 0) rotate(${p.rotation.toFixed(2)}deg) scale(${p.scale.toFixed(3)})`;
+            }
+        }
+
         // --- è‡ªåŠ¨å€’æ•°åŠŸèƒ½ ---
         function startAutoEntryCountdown() {
             autoEntrySeconds = 15;
@@ -1006,7 +1176,7 @@
             const video = document.getElementsByClassName('input_video')[0];
             
             if (typeof Hands === 'undefined' || typeof Camera === 'undefined') {
-                throw new Error("MediaPipe åº“æœªåŠ è½½");
+                throw new Error("MediaPipe library not loaded");
             }
 
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`});
@@ -1019,6 +1189,7 @@
             });
             
             hands.onResults((results) => {
+                updateHandMotion(results);
                 if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
                     ui.camStatusDot.className = "w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80]";
                     ui.camStatusText.innerText = "DETECTED";
@@ -1063,6 +1234,7 @@
         function render() {
             requestAnimationFrame(render);
             updateParticles();
+            updateFloatingPhotos(performance.now());
             renderer.render(scene, camera);
         }
     </script>

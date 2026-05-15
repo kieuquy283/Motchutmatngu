@@ -960,7 +960,7 @@
             const video = document.getElementsByClassName('input_video')[0];
             
             if (typeof Hands === 'undefined' || typeof Camera === 'undefined') {
-                throw new Error("MediaPipe åº“æœªåŠ è½½");
+                throw new Error("MediaPipe library not loaded");
             }
 
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`});
