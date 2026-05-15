@@ -40,24 +40,15 @@
         }
         .floating-photo {
             position: absolute;
-            /* Keep photos proportional to the particle cake.
-               Desktop used to reach 132px, which made cards look larger than the cake.
-               This range keeps them decorative instead of dominant. */
-            width: clamp(48px, 5.8vw, 88px);
+            width: clamp(74px, 10vw, 132px);
             aspect-ratio: 4 / 5;
-            border-radius: 12px;
-            border: 1.5px solid rgba(255, 255, 255, 0.72);
-            box-shadow: 0 0 14px rgba(255, 105, 180, 0.46), 0 8px 22px rgba(0, 0, 0, 0.38);
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.72);
+            box-shadow: 0 0 18px rgba(255, 105, 180, 0.5), 0 10px 30px rgba(0, 0, 0, 0.42);
             object-fit: cover;
             transform: translate3d(0, 0, 0);
             will-change: transform;
             opacity: 0.95;
-        }
-        @media (max-width: 640px) {
-            .floating-photo {
-                width: clamp(42px, 15vw, 68px);
-                border-radius: 10px;
-            }
         }
         
         /* ç¿»è½¬å¡ç‰‡ */
@@ -134,17 +125,6 @@
         }
         .color-control { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #ddd; }
         .color-control input { width: 30px; height: 20px; border: none; border-radius: 4px; cursor: pointer; background: transparent; }
-        #bgm-select {
-            background: rgba(15, 10, 24, 0.88);
-            color: #ffe6f4;
-            border: 1px solid rgba(255, 182, 193, 0.65);
-            box-shadow: 0 0 12px rgba(255, 105, 180, 0.25);
-            font-weight: 700;
-            min-width: 104px;
-        }
-        #bgm-select option[value="calm"] { background: #1a1430; color: #b8f7d4; }
-        #bgm-select option[value="intense"] { background: #2a1117; color: #ffd0d0; }
-        #bgm-select option[value="off"] { background: #1f1f1f; color: #f0f0f0; }
 
         #top-banner {
             position: absolute; top: 15%; left: 0; width: 100%;
@@ -185,8 +165,7 @@
 
         /* æ»šåŠ¨æ–‡å­—åŒºåŸŸæ ·å¼ */
         .scrollable-text {
-            max-height: 320px; /* taller text area */
-            min-height: 280px;
+            max-height: 240px; /* é™åˆ¶é«˜åº¦ */
             overflow-y: auto;  /* å…è®¸åž‚ç›´æ»šåŠ¨ */
             padding-right: 10px; /* ç»™æ»šåŠ¨æ¡ç•™ç‚¹ç©º */
             scrollbar-width: thin; /* Firefox */
@@ -215,7 +194,7 @@
     </div>
 
     <audio id="bgm" loop>
-        <source src="./src/phep_mau.mp3" type="audio/mpeg">
+        <source src="./src/happy-birthday-155461.mp3" type="audio/mpeg">
     </audio>
 
     <video class="input_video" playsinline></video>
@@ -236,11 +215,11 @@
             <button id="start-btn" class="safe-click-area px-12 py-4 bg-gradient-to-r from-pink-600 to-purple-700 rounded-full font-bold text-xl hover:scale-105 active:scale-95 transition transform shadow-[0_0_20px_rgba(255,105,180,0.5)] text-white border border-white/20 cursor-pointer z-50">
                 Một chút sinh nhật
             </button>
-            <div id="loading-text" class="hidden mt-4 text-pink-300 text-sm">Một chút tóc hồng</div>
+            <div id="loading-text" class="hidden mt-4 text-pink-300 text-sm">Loading magic...</div>
         </div>
     </div>
 
-    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">🎤 Thổi nến đê</p><p class="text-xs text-gray-400">(Hold Space or touch and hold the screen if the microphone does not work)</p></div>
+    <div id="blow-hint"><p class="text-lg font-bold text-pink-200 mb-1">🎤 Blow out the candles</p><p class="text-xs text-gray-400">(Hold Space or touch and hold the screen if the microphone does not work)</p></div>
     <div id="blow-meter-container"><div id="blow-meter-bar"></div></div>
 
     <div id="top-banner" class="hidden">
@@ -256,11 +235,6 @@
                 <span id="status-text" class="text-xs md:text-sm text-gray-300 tracking-wider">SYSTEM READY</span>
             </div>
             <div class="flex gap-2">
-                <select id="bgm-select" class="interactive-element glass-panel px-2 text-xs bg-transparent text-pink-100 border border-white/20 rounded-full">
-                    <option value="calm">Nhẹ nhàng</option>
-                    <option value="intense">Căng</option>
-                    <option value="off">Tắt nhạc</option>
-                </select>
                 <button id="settings-toggle" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90 text-sm">🎨</button>
                 <button id="music-btn" class="interactive-element p-3 glass-panel hover:bg-white/20 transition rounded-full active:scale-90">🎵</button>
             </div>
@@ -311,11 +285,11 @@
                 <div class="flip-card-front glass-panel bg-gradient-to-br from-pink-500/40 to-purple-600/40 border border-white/30 p-1">
                     <div class="bg-black/80 rounded-[1rem] p-6 h-full flex flex-col backdrop-blur-md">
                         <div class="w-full aspect-[4/3] bg-gray-800 rounded-lg mb-6 overflow-hidden relative border border-white/10 shadow-inner">
-                            <img src="./src/mot_chut_loi_chuc.png" class="w-full h-full object-cover" alt="Gift">
+                            <img src="https://bpic.588ku.com/Templet_origin_pic/05/19/43/8c971b1364922e551b4fbccb2d5719d2.jpg" class="w-full h-full object-cover" alt="Gift">
                             <div class="absolute bottom-3 left-4 text-white/90 font-handwriting text-2xl">Happy Birthday!</div>
                         </div>
                         <div class="text-center mt-auto mb-8">
-                            <p class="text-gray-300 mb-6 font-light leading-relaxed">Sắp xúc động lắm <br>Đừng khóc nhé😭😭😭.</p>
+                            <p class="text-gray-300 mb-6 font-light leading-relaxed">This is more than digital fireworks,<br>it is a moment made just for you.</p>
                             <button id="next-surprise-btn" class="safe-click-area w-full py-3 bg-gradient-to-r from-pink-600 to-purple-700 rounded-xl font-bold text-white shadow-lg hover:brightness-110 active:scale-95 transition">What's the surprise? ✨</button>
                         </div>
                     </div>
@@ -328,7 +302,7 @@
                         <!-- ç¬¬ä¸€é¡µï¼šç”Ÿæ—¥ç¥ç¦ (å¸¦ç…§ç‰‡) -->
                         <div id="card-page-1" class="w-full h-full flex flex-col">
                             <div class="mb-4 text-5xl animate-bounce text-center">💌</div>
-                            <h3 class="text-2xl font-bold text-pink-300 mb-6 font-handwriting text-center">Một chút Ing lịch nhé</h3>
+                            <h3 class="text-2xl font-bold text-pink-300 mb-6 font-handwriting text-center">To the most special you</h3>
                             <div id="typewriter-text-1" class="text-left text-gray-200 space-y-4 font-light leading-7 text-sm md:text-base border-l-2 border-pink-500/50 pl-4 mb-4 flex-grow scrollable-text"></div>
                             
                             <button id="to-page-2-btn" class="safe-click-area px-6 py-2 mt-auto rounded-full bg-white/10 text-pink-200 hover:bg-white/20 transition text-sm flex items-center justify-center mx-auto">
@@ -340,7 +314,7 @@
                         <div id="card-page-2" class="w-full h-full flex flex-col hidden">
                             <h3 class="text-xl font-bold text-purple-300 mb-4 font-handwriting text-center mt-2">A little note from me</h3>
                             <!-- æ»šåŠ¨åŒºåŸŸ -->
-                            <div id="typewriter-text-2" class="text-left text-gray-200 space-y-3 font-light leading-6 text-sm md:text-base border-l-2 border-purple-500/50 pl-4 mb-1 flex-grow scrollable-text h-full"></div>
+                            <div id="typewriter-text-2" class="text-left text-gray-200 space-y-3 font-light leading-6 text-sm md:text-base border-l-2 border-purple-500/50 pl-4 mb-4 flex-grow scrollable-text h-full"></div>
                             
                             <button id="close-card-btn" class="safe-click-area px-8 py-2 mt-auto rounded-full border border-white/30 text-gray-300 hover:bg-white/10 hover:text-white transition text-sm mx-auto">
                                 Close card
@@ -372,16 +346,7 @@
 
         // --- å…¨å±€å˜é‡ä¸Žé…ç½® ---
         const CAKE_THEME = { bottom: "#FF69B4", top: "#FFB6C1", cream: "#FFFFFF" };
-        const VISUAL_CONFIG = {
-            particleCount: IS_MOBILE ? 4000 : 7500,
-            color: 0xff69b4,
-            blowThreshold: 15,
-            blowIncreaseSpeed: 2.2,
-            blowDecreaseSpeed: 0.15,
-            blowMaxDuration: 100,
-            micSignalThreshold: 10,
-            micAttackFrames: 10
-        };
+        const VISUAL_CONFIG = { particleCount: IS_MOBILE ? 4000 : 7500, color: 0xff69b4, blowThreshold: 15, blowIncreaseSpeed: 2.2, blowDecreaseSpeed: 0.15, blowMaxDuration: 100 };
         const STATE = { INTRO: -1, IDLE: 0, COUNTDOWN: 1, CAKE: 2, BLOWING: 3, CELEBRATION: 4 };
         
         let currentState = STATE.INTRO;
@@ -395,11 +360,6 @@
         let isSpacePressed = false; 
         let isTouching = false; 
         let isBlowing = false;
-        let micNoiseFloor = 0;
-        let micActiveFrames = 0;
-        let blowingStartAt = 0;
-        let touchStartAt = 0;
-        let spaceStartAt = 0;
         
         let rotationVelocity = 0;
         let isDragging = false;
@@ -424,13 +384,6 @@
         
         let audioContext, analyser;
         const bgm = document.getElementById('bgm');
-        const bgmSelect = document.getElementById('bgm-select');
-        const bgmSource = bgm.querySelector('source');
-        const BGM_TRACKS = {
-            calm: "./src/phep_mau.mp3",
-            intense: "./src/drill.mp3"
-        };
-        let bgmMode = "calm";
 
         const ui = {
             startOverlay: document.getElementById('start-overlay'),
@@ -627,16 +580,6 @@
                     if(u<0.2) col.setHex(0x0000FF); else if(u>0.7) col.setHex(0xFF4500);
                     points.push({ vec: new THREE.Vector3(r*Math.cos(theta), flameY+h, r*Math.sin(theta)), type: 'flame', color: col });
                 }
-
-                // Make the cake visually stronger so the floating photos feel proportional to it.
-                // Scale around the cake center instead of simply multiplying Y from the origin.
-                const cakeScale = IS_MOBILE ? 1.14 : 1.26;
-                const cakeCenterY = -8;
-                points.forEach(point => {
-                    point.vec.x *= cakeScale;
-                    point.vec.z *= cakeScale;
-                    point.vec.y = cakeCenterY + (point.vec.y - cakeCenterY) * cakeScale;
-                });
             }
             return points;
         }
@@ -812,12 +755,6 @@
         function showCake() {
             log('å±•ç¤ºè›‹ç³•ï¼Œå¼€å¯å¹æ°”æ£€æµ‹');
             currentState = STATE.BLOWING;
-            blowProgress = 0;
-            micNoiseFloor = 0;
-            micActiveFrames = 0;
-            blowingStartAt = performance.now();
-            touchStartAt = 0;
-            spaceStartAt = 0;
             transitionTo('cake');
             showFloatingPhotos();
             ui.settingsPanel.style.display = 'flex';
@@ -881,30 +818,19 @@
 
         // ç¬¬äºŒé¡µæ­‰æ„ä¸Žå¿«é€’
         const wishes_part2 = [
-            "Hai đứa mình tuy là như chó với mèo, nghỉ chơi thì cũng n lần",
+            "A small note from my heart,",
+            "I hope this little surprise makes you smile today.",
+            "Thank you for being such a bright part of life.",
             "",
-            "Nhưng mà suy cho cùng thì cũng chỉ t mới chiều được m như thế, mà lúc t mệt thì cũng chỉ biết gọi cho m (tuy là m đang dỗi n lần)",
+            "No matter where this year takes you,",
+            "I will always be cheering for you.",
             "",
-            "Thì thôi kệ nhé, tự hết dỗi nhé!",
-            "",
-            "Bình thường thì cũng ít tâm sự, toàn là m nói t nghe thôi, nhưng mà có vấn đề gì thì cứ ới t, t không chắc là giải quyết được luôn cho m đâu mà ít ra thì m cũng có người nghe (t đi guốc trong bụng m mà)",
-            "",
-            "Sắp tới thì cũng +1 tuổi rồi, tuy là tâm hồn thì vẫn mãi mãi tuổi 18 thôi nhưng mà dù gì thì vẫn phải trưởng thành (ít nhất là với xã hội). Thì t cũng mong là m có trưởng thành thì vẫn giữ được sự vô tư, nhung mà than ít thôi sau này chồng nó vụt cho vào lưng đấy.",
-            "",
-            "Bình thường thì t hay ăn nói khó nghe 1 chút trong khi t lại k cho m nói bậy, thế nhưng mà chắc là m cũng biết là t chỉ nói thế thôi còn m cần thì t vẫn giúp, m có vấn đề gì thì t cũng giải quyết cho được. Cái này để bạn sửa dần dần nhé!!Hi",
-            "",
-            "Tuy là m k nhớ gì thôi nhưng mà được cái t trí nhớ tốt, là bọn mình chơi với nhau từ lớp 12 từ hồi ITC nhé. Thật ra thì t vẫn thích m lúc trước hơn, t biết là ai thì cũng thay đổi, nhưng mà t thấy m trước đây vẫn năng động hơn, lạc quan hơn, tuy là vẫn vô tư nhưng mà cũng biết lo cho mình hơn. Lúc đấy t lại còn xấu tính, chả hiểu sao m lại chơi với t trong khi 2 đứa trái ngược nhau",
-            "",
-            "T cũng k biết là giờ m như thế thì là tốt hay xấu nữa, t cũng k mong là có thể thay đổi được m. Nhưng mà lúc nào mà m gặp khó khăn thì t vẫn sẵn sàng, còn lúc nào t bận quá thì tạm thời bỏ qua nhé.",
-            "",
-            "Thì đấy nói chung là CHÚC MỪNG SINH NHẬT NHI ĐỒNG THỐI TAI, mong là tuổi mới có nhiều trả nghiệm mới, gặp thêm nhiều điều tuyệt vời mới",
-            "",
-            "Có gì muốn nói thì lưu số t vào 0344758265, để t còn tắt thông báo mess. 1234567h vẫn nghe nhé",
-            "",
-            "Đây là sản phẩm của 1 chút mất ngủ nhé. Kỉ niệm 30 tiếng không ngủ 1 chút thôi 🫩🫩"
+            "Happy Birthday once again! 🎉🎂🎈",
+            "Please share a photo or video when you open your gift. 📸😊",
+            "I cannot wait to see your reaction! 😆"
         ];
 
-        function typeWriter(textArray, containerId, speed = 25) {
+        function typeWriter(textArray, containerId, speed = 50) {
             const container = document.getElementById(containerId);
             container.innerHTML = "";
             let lineIndex = 0;
@@ -952,7 +878,7 @@
             ui.page1.classList.add('hidden');
             ui.page2.classList.remove('hidden');
             // é‡æ–°è§¦å‘ç¬¬äºŒé¡µçš„æ‰“å­—æœº
-            setTimeout(() => typeWriter(wishes_part2, 'typewriter-text-2', 15), 100);
+            setTimeout(() => typeWriter(wishes_part2, 'typewriter-text-2', 30), 100);
         });
 
         ui.floatingGiftBtn.addEventListener('click', (e) => {
@@ -1055,7 +981,7 @@
                 const slot = (Math.PI * 2 * i) / floatingPhotos.length;
                 p.orbitAngle = slot + Math.random() * 0.16;
                 p.orbitSpeed = (IS_MOBILE ? 0.0032 : 0.0042) + Math.random() * 0.0022;
-                p.orbitRadius = 34 + Math.random() * 9;
+                p.orbitRadius = 28 + Math.random() * 8;
                 p.orbitDepth = 0.58 + Math.random() * 0.18;
                 p.orbitHeight += (Math.random() - 0.5) * 2;
                 p.rotation = p.baseRotation;
@@ -1290,25 +1216,17 @@
         document.addEventListener('touchstart', (e) => {
             if(currentState === STATE.BLOWING && !e.target.closest('button') && !e.target.closest('input')) {
                 isTouching = true;
-                touchStartAt = performance.now();
             }
         }, {passive: false});
 
-        document.addEventListener('touchend', () => { isTouching = false; touchStartAt = 0; });
-        document.addEventListener('touchcancel', () => { isTouching = false; touchStartAt = 0; });
-        document.addEventListener('keydown', (e) => {
-            if(e.code === 'Space') {
-                if (!isSpacePressed) spaceStartAt = performance.now();
-                isSpacePressed = true;
-            }
-        });
-        document.addEventListener('keyup', (e) => { if(e.code === 'Space') { isSpacePressed = false; spaceStartAt = 0; } });
+        document.addEventListener('touchend', () => isTouching = false);
+        document.addEventListener('touchcancel', () => isTouching = false);
+        document.addEventListener('keydown', (e) => { if(e.code === 'Space') isSpacePressed = true; });
+        document.addEventListener('keyup', (e) => { if(e.code === 'Space') isSpacePressed = false; });
 
         function checkAudio() {
             requestAnimationFrame(checkAudio);
             if (currentState !== STATE.BLOWING) return;
-            const now = performance.now();
-            const pastGrace = (now - blowingStartAt) > 700;
             let volume = 0;
             if (analyser) {
                 const data = new Uint8Array(analyser.frequencyBinCount);
@@ -1316,33 +1234,7 @@
                 let sum = 0; for(let i=0; i<data.length; i++) sum += data[i];
                 volume = sum / data.length;
             }
-
-            // Adaptive mic gate to avoid auto-trigger from ambient noise.
-            if (!isSpacePressed && !isTouching) {
-                if (micNoiseFloor === 0) micNoiseFloor = volume;
-                const adaptRate = isBlowing ? 0.004 : 0.03;
-                micNoiseFloor += (volume - micNoiseFloor) * adaptRate;
-            }
-            const micSignal = Math.max(0, volume - micNoiseFloor);
-            const hardGate = Math.max(VISUAL_CONFIG.blowThreshold, micNoiseFloor + VISUAL_CONFIG.micSignalThreshold);
-            const micTriggered =
-                volume > hardGate &&
-                micSignal > VISUAL_CONFIG.micSignalThreshold;
-
-            if (micTriggered) {
-                micActiveFrames = Math.min(micActiveFrames + 1, 60);
-            } else {
-                micActiveFrames = Math.max(micActiveFrames - 1, 0);
-            }
-
-            const spaceHeld = isSpacePressed && spaceStartAt > 0 && (now - spaceStartAt) > 160 && pastGrace;
-            const touchHeld = isTouching && touchStartAt > 0 && (now - touchStartAt) > 220 && pastGrace;
-            const userTriggered =
-                spaceHeld ||
-                touchHeld ||
-                (pastGrace && micActiveFrames >= VISUAL_CONFIG.micAttackFrames);
-
-            if (userTriggered) {
+            if (volume > VISUAL_CONFIG.blowThreshold || isSpacePressed || isTouching) {
                 isBlowing = true;
                 blowProgress += VISUAL_CONFIG.blowIncreaseSpeed; 
             } else {
@@ -1355,10 +1247,6 @@
         }
 
         function fadeAudioIn() {
-            if (bgmMode === 'off') {
-                bgm.pause();
-                return;
-            }
             const playPromise = bgm.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
@@ -1378,40 +1266,8 @@
         }
         
         document.getElementById('music-btn').addEventListener('click', () => {
-            if (bgmMode === 'off') return;
             if (bgm.paused) bgm.play(); else bgm.pause();
         });
-
-        function setBgmMode(mode, autoPlayIfRunning = false) {
-            bgmMode = mode;
-            if (mode === 'off') {
-                bgm.pause();
-                return;
-            }
-            const nextSrc = BGM_TRACKS[mode] || BGM_TRACKS.calm;
-            const currentSrc = bgmSource.getAttribute('src');
-            const shouldKeepPlaying = autoPlayIfRunning && !bgm.paused;
-            if (currentSrc !== nextSrc) {
-                bgmSource.setAttribute('src', nextSrc);
-                bgm.load();
-            }
-            if (autoPlayIfRunning) {
-                const p = bgm.play();
-                if (p && typeof p.catch === 'function') p.catch(() => {});
-            } else if (shouldKeepPlaying) {
-                const p = bgm.play();
-                if (p && typeof p.catch === 'function') p.catch(() => {});
-            }
-        }
-
-        if (bgmSelect) {
-            bgmSelect.value = "calm";
-            bgmSelect.addEventListener('change', (e) => {
-                const mode = e.target.value;
-                const allowAutoplay = currentState !== STATE.INTRO;
-                setBgmMode(mode, allowAutoplay);
-            });
-        }
 
         async function initCamera() {
             const video = document.getElementsByClassName('input_video')[0];
@@ -1481,3 +1337,4 @@
     </script>
 </body>
 </html>
+
